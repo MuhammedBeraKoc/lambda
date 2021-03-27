@@ -24,8 +24,13 @@ function minify() {
         .pipe(dest('dist'))
 }
 
+function packageStatus() {
+    return Promise.resolve(run('npm pack --dry-run').exec())
+}
+
 exports.clearDist = clearDist
 exports.format = format
 exports.minify = minify
 exports.compileTypeScript = compileTypeScript
+exports.packageStatus = packageStatus
 exports.default = series(format, clearDist, compileTypeScript, minify)
